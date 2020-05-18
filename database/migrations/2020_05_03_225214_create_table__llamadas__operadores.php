@@ -16,10 +16,11 @@ class CreateTableLlamadasOperadores extends Migration
         Schema::create('Llamadas_Operadores', function (Blueprint $table) {
             $table->id();
             $table->integer('idLlamada');
-            $table->integer('idOperador');
-            $table->timestamp('Inicio')->nullable(true);
-            $table->timestamp('Final')->nullable(true);
+            $table->integer('idOperador')->nullable(true);
+            $table->timestamp('inicio')->nullable(true);
+            $table->timestamp('fin')->nullable(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

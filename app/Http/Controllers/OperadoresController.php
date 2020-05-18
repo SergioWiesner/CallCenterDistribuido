@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Operadores;
+use App\Http\Requests\operadorRequest;
 use Illuminate\Http\Request;
+use App\Resources\Operadores;
 
 class OperadoresController extends Controller
 {
+    public $manager;
+
+    public function __construct()
+    {
+        $this->manager = new Operadores();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,18 +38,34 @@ class OperadoresController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(operadorRequest $request)
     {
-        //
+        try {
+            $id = $this->manager->crearOperador($request->all());
+            return response()->json([
+                'state' => 500,
+                'data' => [
+                    "id" => $id
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'state' => 401,
+                'data' => [
+                    "error" => $e->getMessage()
+                ]
+            ]);
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Operadores  $operadores
+     * @param \App\Operadores $operadores
      * @return \Illuminate\Http\Response
      */
     public function show(Operadores $operadores)
@@ -52,7 +76,7 @@ class OperadoresController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Operadores  $operadores
+     * @param \App\Operadores $operadores
      * @return \Illuminate\Http\Response
      */
     public function edit(Operadores $operadores)
@@ -63,8 +87,8 @@ class OperadoresController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Operadores  $operadores
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Operadores $operadores
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Operadores $operadores)
@@ -75,7 +99,7 @@ class OperadoresController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Operadores  $operadores
+     * @param \App\Operadores $operadores
      * @return \Illuminate\Http\Response
      */
     public function destroy(Operadores $operadores)
