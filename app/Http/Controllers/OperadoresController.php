@@ -18,11 +18,24 @@ class OperadoresController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        try {
+
+            return response()->json([
+                'state' => 500,
+                'data' => $this->manager->operadoresDisponibles()
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'state' => 401,
+                'data' => [
+                    "error" => $e->getMessage()
+                ]
+            ]);
+        }
     }
 
     /**

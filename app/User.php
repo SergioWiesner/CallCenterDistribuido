@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','tipoOperador', 'idSupervisor'
+        'name', 'email', 'password', 'tipoOperador', 'idSupervisor'
     ];
 
     /**
@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function llamadas()
+    {
+        return $this->hasMany('App\Llamadas_Operadores', 'idOperador', 'id');
+    }
+
+    public function tipoOperador()
+    {
+        return $this->belongsTo('App\Tipo_Operadores', 'tipoOperador', 'id');
+    }
 }

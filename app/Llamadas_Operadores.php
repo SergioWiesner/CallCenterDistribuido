@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Llamadas_Operadores extends Model
 {
-    protected $table = "llamadas_operadores";
+    protected $table = "Llamadas_Operadores";
     protected $fillable = ['id', 'idLlamada', 'idOperador', 'Inicio', 'Final'];
+
+    public function llamadas()
+    {
+        return $this->belongsTo('App\Llamadas', 'idLlamada', 'id');
+    }
+
+    public function operadores()
+    {
+        return $this->belongsTo('App\User', 'idOperador', 'id');
+    }
 }
