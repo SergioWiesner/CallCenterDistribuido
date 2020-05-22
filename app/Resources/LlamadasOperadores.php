@@ -5,6 +5,7 @@ namespace App\Resources;
 
 use App\Llamadas_Operadores;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class LlamadasOperadores
 {
@@ -28,8 +29,17 @@ class LlamadasOperadores
     public function colgarLlamadaPorLlamada($idLlamada)
     {
         $fecha = new Carbon();
-        $this->modelo::where('idLlamada', $idLlamada)->update([
-            "fin" => $fecha->toDateTimeString()
+        DB::table('Llamadas_Operadores')->updateOrInsert(
+            ['idLlamada' => $idLlamada, 'fin' => $fecha->toDateTimeString()],
+            ['idOperador' => null, 'Inicio' => $fecha->toDateTimeString(), 'created_at' => $fecha->toDateTimeString(), 'updated_at' => $fecha->toDateTimeString()]
+        );
+    }
+
+    public function colgarLlamadaPorOperador($idOperador)
+    {
+        $fecha = new Carbon();
+        $this->modelo::where('idOperador', $idOperador)->update([
+            'fin' => $fecha->toDateTimeString()
         ]);
     }
 }

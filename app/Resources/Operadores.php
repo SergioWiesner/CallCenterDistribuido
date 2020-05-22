@@ -5,6 +5,7 @@ namespace App\Resources;
 
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use App\Resources\LlamadasOperadores;
 
 class Operadores
 {
@@ -40,6 +41,11 @@ class Operadores
         } catch (\Exception $e) {
             return [];
         }
+    }
 
+    public function colgarLlamada($idoperador)
+    {
+        $llamadasOperadores = new LlamadasOperadores();
+        $llamadasOperadores->colgarLlamadaPorOperador($idoperador);
     }
 }

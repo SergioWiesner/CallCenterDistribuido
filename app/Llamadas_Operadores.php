@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Llamadas_Operadores extends Model
 {
     protected $table = "Llamadas_Operadores";
-    protected $fillable = ['id', 'idLlamada', 'idOperador', 'Inicio', 'Final'];
+    protected $fillable = ['id', 'idLlamada', 'idOperador', 'Inicio', 'fin'];
 
     public function llamadas()
     {

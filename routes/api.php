@@ -22,4 +22,6 @@ Route::middleware('api')->group(function () {
     Route::resource('llamadas', 'LlamadasController');
     Route::resource('operadores', 'OperadoresController');
     Route::post('login', 'HomeController@login');
+    Route::post('llamadas/contestar', 'OperadoresController@contestarLlamada');
+
 });

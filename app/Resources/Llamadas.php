@@ -4,9 +4,6 @@
 namespace App\Resources;
 
 use App\Llamadas as ModelLlamadas;
-use App\Resources\LlamadasOperadores;
-use App\Resources\Tools;
-use App\Resources\Operadores;
 use Carbon\Carbon;
 
 class Llamadas
@@ -20,7 +17,7 @@ class Llamadas
 
     public function listarLlamadas()
     {
-        return Tools::collectionToArray($this->modelo::doesnthave('Operador')->get());
+        return Tools::collectionToArray($this->modelo::doesnthave('Operador')->with('Cliente')->get());
     }
 
     public function registrarLlamadas($datos)
@@ -50,6 +47,7 @@ class Llamadas
     public function conectarSiguienteLlamada()
     {
         $listadeLlamadas = self::listarLlamadas();
+        dd($listadeLlamadas);
 
     }
 }

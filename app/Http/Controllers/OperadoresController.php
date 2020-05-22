@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContestarLlamadaRequest;
 use App\Http\Requests\operadorRequest;
+use App\Resources\LlamadasOperadores;
 use Illuminate\Http\Request;
 use App\Resources\Operadores;
 
@@ -72,7 +74,6 @@ class OperadoresController extends Controller
                 ]
             ]);
         }
-
     }
 
     /**
@@ -97,6 +98,25 @@ class OperadoresController extends Controller
         //
     }
 
+    public function contestarLlamada(ContestarLlamadaRequest $request)
+    {
+        try {
+            $llamadasoperadoras = new LlamadasOperadores();
+            $llamadasoperadoras->registrarLlamadaOperador($request->all());
+            return response()->json([
+                'state' => 500,
+                'data' => []
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'state' => 401,
+                'data' => [
+                    "error" => $e->getMessage()
+                ]
+            ]);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -113,10 +133,23 @@ class OperadoresController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Operadores $operadores
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Operadores $operadores)
+    public function destroy($operadores)
     {
-        //
+        try {
+            $this->manager->colgarLlamada($operadores);
+            return response()->json([
+                'state' => 500,
+                'data' => []
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'state' => 401,
+                'data' => [
+                    "error" => $e->getMessage()
+                ]
+            ]);
+        }
     }
 }
