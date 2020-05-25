@@ -31,8 +31,8 @@ class LlamadasOperadores
     {
         $fecha = new Carbon();
         DB::table('Llamadas_Operadores')->updateOrInsert(
-            ['idLlamada' => $idLlamada, 'fin' => $fecha->toDateTimeString()],
-            ['idOperador' => null, 'Inicio' => $fecha->toDateTimeString(), 'created_at' => $fecha->toDateTimeString(), 'updated_at' => $fecha->toDateTimeString()]
+            ['idLlamada' => $idLlamada],
+            ['fin' => $fecha->toDateTimeString(), 'Inicio' => $fecha->toDateTimeString(), 'created_at' => $fecha->toDateTimeString(), 'updated_at' => $fecha->toDateTimeString()]
         );
     }
 
