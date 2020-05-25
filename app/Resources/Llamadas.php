@@ -22,7 +22,9 @@ class Llamadas
 
     public function registrarLlamadas($datos)
     {
+
         $fecha = new Carbon();
+
         $registro = $this->modelo::create([
             'Entrada' => $fecha->toDateTimeString(),
             'documentopersona' => $datos['documentopersona']
@@ -30,7 +32,6 @@ class Llamadas
 
         $operadores = new Operadores();
         $operadoresDisponibles = $operadores->operadoresDisponibles();
-
         if (count($operadoresDisponibles) > 0) {
             $conexion = new LlamadasOperadores();
             $conexion->registrarLlamadaOperador(['idLlamada' => $registro->id, 'idOperador' => $operadoresDisponibles[0]['id']]);

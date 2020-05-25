@@ -34,7 +34,7 @@ class Operadores
             $operadores = Tools::collectionToArray($this->operadormodel::where('tipoOperador', $id)->whereDoesntHave('llamadas', function ($query) {
                 $query->whereNull('fin');
             })->get());
-            if (count($operadores) <= 0) {
+            if (count($operadores) <= 0 && $id < 6) {
                 $operadores = self::operadoresDisponibles($id + 1);
             }
             return $operadores;

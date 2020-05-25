@@ -24,6 +24,7 @@ class LlamadasOperadores
             'idOperador' => $data['idOperador'],
             'Inicio' => $fecha->toDateTimeString()
         ]);
+        return true;
     }
 
     public function colgarLlamadaPorLlamada($idLlamada)

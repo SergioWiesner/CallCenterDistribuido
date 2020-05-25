@@ -56,22 +56,23 @@ class LlamadasController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $id = $this->manager->registrarLlamadas($request->all());
-            return response()->json([
-                'state' => 500,
-                'data' => [
-                    "id" => $id
-                ]
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'state' => 401,
-                'data' => [
-                    "error" => $e->getMessage()
-                ]
-            ]);
-        }
+//        try {
+
+        $id = $this->manager->registrarLlamadas($request->all());
+        return response()->json([
+            'state' => 500,
+            'data' => [
+                "id" => $id
+            ]
+        ]);
+//        } catch (\Exception $e) {
+//            return response()->json([
+//                'state' => 401,
+//                'data' => [
+//                    "error" => $e->getMessage()
+//                ]
+//            ]);
+//        }
     }
 
     /**
